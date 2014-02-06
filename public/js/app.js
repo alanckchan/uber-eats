@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('uberEatsApp', ['google-maps', 'uberEatsApp.controllers']);
+angular.module('uberEatsApp', ['google-maps', 'uberEatsApp.controllers', 'uberEatsApp.services']);
