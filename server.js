@@ -1,5 +1,6 @@
 var express = require('express');
-var routes = require('./routes');
+var routes = require('./app/routes');
+var api =  require('./app/routes/api');
 var http = require('http');
 var path = require('path');
 
@@ -11,7 +12,7 @@ var app = module.exports = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/app/views');
 app.set('view engine', 'jade');
 app.use(express.logger('dev'));
 app.use(express.json());
@@ -32,6 +33,7 @@ if (app.get('env') === 'production') {
 
 // Routes
 app.get('/', routes.index);
+app.get('/food_trucks', api.food_trucks);
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
