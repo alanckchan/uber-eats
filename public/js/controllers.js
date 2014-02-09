@@ -2,7 +2,7 @@
 
 var controllers = angular.module('uberEatsApp.controllers', []);
 
-controllers.controller('MapController', ['$scope', function($scope) {
+controllers.controller('MapController', function($scope, foodTruckService) {
   $scope.map = {
     center: {
       latitude: 37.775817,
@@ -10,4 +10,12 @@ controllers.controller('MapController', ['$scope', function($scope) {
     },
     zoom: 15
   };
-}]);
+
+  $scope.map.foodTruckMarkers = [];
+
+  foodTruckService.getFoodTrucks().then(function(foodTrucks) {
+    foodTrucks.forEach(function(foodTruck) {
+      $scope.map.foodTruckMarkers.push({ latitude: foodTruck.location[1], longitude: foodTruck.location[0] });
+    });
+  });
+});

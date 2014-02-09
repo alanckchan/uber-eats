@@ -1,45 +1,21 @@
 var express = require('express');
-var routes = require('./app/routes');
-var api =  require('./app/routes/api');
+var fs = require('fs');
 var http = require('http');
-var path = require('path');
+
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var app = module.exports = express();
+require('./config/express')(app);
 
-/**
-* Configuration
-*/
+var config = require('./config/config');
 
-// all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', __dirname + '/app/views');
-app.set('view engine', 'jade');
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(app.router);
+var mongoose = require('mongoose');
+var db = mongoose.connect(config.db);
 
-// development only
-if (app.get('env') === 'development') {
-   app.use(express.errorHandler());
-};
-
-// production only
-if (app.get('env') === 'production') {
-  // TODO
-}; 
-
-// Routes
-app.get('/', routes.index);
-app.get('/food_trucks', api.food_trucks);
-// redirect all others to the index (HTML5 history)
-app.get('*', routes.index);
-
-/**
-* Start Server
-*/
+var routes_path = './app/routes';
+fs.readdirSync(routes_path).forEach(function(file) {
+  require(routes_path + '/' + file)(app);
+});
 
 http.createServer(app).listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));

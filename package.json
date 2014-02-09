@@ -1,10 +1,16 @@
 {
-	"name": "application-name",
-	"version": "0.0.1",
-	"private": true,
-	"dependencies": {
-		"express": "~3.4.x",
-		"jade": "0.35.0"
-	},
-	"engine": "node >= 0.10.25"
+  "name": "uber-eats",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "~3.4.x",
+    "jade": "0.35.0",
+    "lodash": "~2.4.1",
+    "mongoose": "~3.8.6"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "request": "~2.33.0"
+  },
+  "engine": "node >= 0.10.25"
 }
