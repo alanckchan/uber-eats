@@ -1,6 +1,5 @@
 'use strict';
 
-var mongoose = require('mongoose');
 var FoodTruck = require('../models/food-truck.js');
 
 exports.all = function(req, res) {
