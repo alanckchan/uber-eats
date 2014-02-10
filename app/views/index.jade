@@ -18,8 +18,9 @@ html(ng-app="uberEatsApp")
           a.navbar-brand(href="#") Uber Eats
     .jumbotron
       .container-fluid(ng-controller="MapController")
-        google-map(center="map.center" zoom="map.zoom")
-          markers(models="map.foodTruckMarkers", coords="'self'")
+        google-map(center="map.center" zoom="map.zoom" bounds="map.bounds" events="map.events" draggable="true")
+          marker(coords="map.userSelectedMarkerLocation" options="map.userSelectedMarkerOptions")
+          markers(models="map.foodTruckMarkers" coords="'self'")
 
     script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js')
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
