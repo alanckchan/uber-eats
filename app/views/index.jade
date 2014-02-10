@@ -6,7 +6,7 @@ html(ng-app="uberEatsApp")
     title Uber Eats
     link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css')
     link(rel='stylesheet', href='/css/app.css')
-  body
+  body(ng-controller="MapController")
     .navbar.navbar-inverse.navbar-fixed-top(role="navigation")
       .container
         .navbar-header
@@ -17,10 +17,19 @@ html(ng-app="uberEatsApp")
             span.icon-bar
           a.navbar-brand(href="#") Uber Eats
     .jumbotron
-      .container-fluid(ng-controller="MapController")
+      .container-fluid
         google-map(center="map.center" zoom="map.zoom" bounds="map.bounds" events="map.events" draggable="true")
           marker(coords="map.userSelectedMarkerLocation" options="map.userSelectedMarkerOptions")
-          markers(models="map.foodTruckMarkers" coords="'self'")
+          markers(models="map.foodTruckMarkers" coords="'self'" click="'onClicked'")
+
+    .jumbotron
+      .container-fluid
+        .row-fluid
+          .span12
+            p Food Truck Details
+            .details
+              h4 {{selectedFoodTruckName}}
+              h5 {{selectedFoodTruckDetails}}
 
     script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js')
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')

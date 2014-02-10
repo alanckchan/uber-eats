@@ -10,8 +10,12 @@ services.factory('foodTruckService', function($http) {
       });
     },
 
+    getFoodTruckById: function(id) {
+      return $http.get('/food-trucks/' + id);
+    },
+
     getFoodTrucksNearLocation: function(lat, lng, distance) {
-      return $http.get('/food-trucks/near?lat=' + lat + '&lng=' + lng + '&distance=' + distance);
+      return $http.get('/food-trucks/find/near?lat=' + lat + '&lng=' + lng + '&distance=' + distance);
     }
   }
 });

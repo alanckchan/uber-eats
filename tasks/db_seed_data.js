@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         var foodTrucks = JSON.parse(body).data;
         var foodTrucksToCreate = [];
         foodTrucks.forEach(function(foodTruck) {
-          foodTrucksToCreate.push({ name: foodTruck[9], location: [foodTruck[30][2], foodTruck[30][1]] });
+          foodTrucksToCreate.push({ name: foodTruck[9], details: foodTruck[19], location: [foodTruck[30][2], foodTruck[30][1]] });
         });
 
         var promise = FoodTruck.create(foodTrucksToCreate);

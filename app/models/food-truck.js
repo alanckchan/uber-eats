@@ -9,6 +9,11 @@ var FoodTruckSchema = new Schema({
     default: '',
     trim: true
   },
+  details: {
+    type: String,
+    default: '',
+    trim: true
+  },
   location: {
     type: [Number],
     index: '2dsphere'

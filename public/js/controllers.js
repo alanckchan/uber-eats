@@ -18,6 +18,9 @@ controllers.controller('MapController', function($scope, foodTruckService) {
     userSelectedMarkerOptions: { animation: 1 }
   };
 
+  $scope.selectedFoodTruckName = "";
+  $scope.selectedFoodTruckDetails = "";
+
   function onMapClicked(mapModel, eventName, originalEventArgs) {
     var lat = originalEventArgs[0].latLng.lat();
     var lng = originalEventArgs[0].latLng.lng();
@@ -30,7 +33,16 @@ controllers.controller('MapController', function($scope, foodTruckService) {
     foodTruckService.getFoodTrucksNearLocation(lat, lng, distance).then(function(foodTrucks) {
       $scope.map.foodTruckMarkers = []
       foodTrucks.data.forEach(function(foodTruck) {
-        $scope.map.foodTruckMarkers.push({ latitude: foodTruck.obj.location[1], longitude: foodTruck.obj.location[0] });
+        $scope.map.foodTruckMarkers.push({ id: foodTruck.obj._id, latitude: foodTruck.obj.location[1], longitude: foodTruck.obj.location[0] });
+      });
+
+      $scope.map.foodTruckMarkers.forEach(function(marker) {
+        marker.onClicked = function() {
+          foodTruckService.getFoodTruckById(marker.id).then(function(foodTruck) {
+            $scope.selectedFoodTruckName = foodTruck.data.name;
+            $scope.selectedFoodTruckDetails = foodTruck.data.details;
+          });
+        };
       });
     });
   }
