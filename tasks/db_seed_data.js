@@ -8,7 +8,7 @@ module.exports = function(grunt) {
 
     var done = this.async();
 
-    process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+    process.env.NODE_ENV = process.env.NODE_ENV || 'production';
 
     var config = require('../config/config');
     var mongoose = require('mongoose');
