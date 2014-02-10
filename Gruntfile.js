@@ -6,5 +6,5 @@ module.exports = function(grunt) {
   });
 
   grunt.loadTasks('tasks');
-  grunt.registerTask('heroku:production', 'db-seed-data');
+  grunt.registerTask('heroku:', 'db-seed-data');
 };
